@@ -1,0 +1,31 @@
+swagger: '2.0'
+info:
+  title: Authentication Without Passwd
+  version: '1.0'
+basePath: "/api"
+
+paths:
+  /name/{user}:
+    get:
+      operationId: services.get_name
+      tags:
+        - "Username"
+      summary: "Get Hello"
+      description: "<URL>/name/{name}"
+      parameters:
+        - name: user
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+securityDefinitions:
+  basic:
+    type: basic
+    x-basicInfoFunc: security.basic_auth
+  apiKey:
+    type: apiKey
+    in: header
+    name: X-Auth
+    x-apikeyInfoFunc: security.apikey_auth
