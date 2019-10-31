@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-def get_name(user):
-    msg = f"Hello, {user}"
+def get_name(username):
+    msg = f"Hello, {username}"
     return msg
     

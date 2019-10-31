@@ -5,15 +5,32 @@ info:
 basePath: "/api"
 
 paths:
-  /name/{user}:
+  /name/{username}:
     get:
       operationId: services.get_name
       tags:
         - "Username"
       summary: "Get Hello"
-      description: "<URL>/name/{name}"
+      description: "<URL>/name/{user}"
       parameters:
-        - name: user
+        - name: username
+          in: path
+          type: string
+          required: true
+      responses:
+        '200':
+          description: OK
+      security:
+        - apiKey: []
+  /token/{username}:
+    get:
+      operationId: security.basic_auth
+      tags:
+        - "Username"
+      summary: "Get Hello"
+      description: "<URL>/token/{user}"
+      parameters:
+        - name: username
           in: path
           type: string
           required: true
@@ -21,9 +38,6 @@ paths:
         '200':
           description: OK
 securityDefinitions:
-  basic:
-    type: basic
-    x-basicInfoFunc: security.basic_auth
   apiKey:
     type: apiKey
     in: header
