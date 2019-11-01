@@ -2,6 +2,7 @@ from commons import log
 import connexion
 from connexion.exceptions import OAuthProblem
 import hashlib
+from random import randint
 
 USER_DB = {
     'user1': {
@@ -12,10 +13,16 @@ USER_DB = {
 }
 TOKEN_DB = {} # Token to user1: 3691fc223cbc6e0a9721a0b03bd408058197ef2eb5a9d51d0b0addd9ce7cd84b
 
+def generate_numbers(size=16):
+    value = ''
+    for _ in range(size):
+        value = str(randint(0,9)) + value
+    return value
+
 def basic_auth(username):
     log(f"Token to user: {username}")
     user_sha = USER_DB.get(username, None)
-    return_token = 123
+    return_token = generate_numbers()
     string_token = f"{return_token}:{user_sha}"
     byte_hash = hashlib.sha256(string_token.encode()).hexdigest()
     TOKEN_DB[username] = byte_hash
